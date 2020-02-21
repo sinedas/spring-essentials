@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="personsService" name="personsService2,personsService3"
+          class="lt.denislav.samples.spring.service.xml.XmlBasedPersonsService">
+
+        <constructor-arg>
+            <ref bean="personsDao"/>
+        </constructor-arg>
+        
+        <property name="genderService">
+            <ref bean="genderService"/>
+        </property>
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <bean id="autowiredPersonsService"
+          class="lt.denislav.samples.spring.service.xml.XmlBasedPersonsService"
+          autowire="constructor"
+    >
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <alias name="personsService" alias="personsService4"/>
+
+    <bean id="genderService"
+        class="lt.denislav.samples.spring.service.GenderService"
+    />
+
+    <!-- autowire="byName"-->
+
+    <bean id="personsDao"
+          class="lt.denislav.samples.spring.service.DummyPersonsDao">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <!-- more bean definitions for data access objects go here -->
+
+    <bean id="personsPrototypeService"
+          scope="prototype"
+          class="lt.denislav.samples.spring.service.xml.XmlBasedPersonsService">
+
+        <constructor-arg>
+            <ref bean="personsDao"/>
+        </constructor-arg>
+
+        <property name="genderService">
+            <ref bean="genderService"/>
+        </property>
+    </bean>
+
+    <!-- Initiliaztion of beans -->
+    <bean id="serviceLocator" class="lt.denislav.samples.spring.service.xml.DefaultServiceLocator"/>
+
+    <bean id="personsService5"
+          factory-bean="serviceLocator"
+          factory-method="createPersonServiceInstance"/>
+
+    <bean id="lazyBean" lazy-init="true"
+          class="lt.denislav.samples.spring.service.xml.LazyBean">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+</beans>

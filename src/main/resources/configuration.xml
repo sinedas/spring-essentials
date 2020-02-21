@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="configurationService"
+          class="lt.denislav.samples.spring.service.xml.XmlBasedConfigurationService">
+
+        <constructor-arg value="0.1"/>
+
+        <property name="dataSources">
+            <list>
+                <value>VMI</value>
+                <value>Sodra</value>
+            </list>
+        </property>
+
+        <property name="adminEmails">
+            <map>
+                <entry key="admin" value="admin@gmail.com"/>
+                <entry key="user" value="user@gmail.com"/>
+            </map>
+        </property>
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+
+</beans>
